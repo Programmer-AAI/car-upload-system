@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CARZX</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <div class="leftNav">CARZX</div>
+    <div class="rightNav">
+      <ul>
+        <li><a href="#" id="nav-home">Home</a></li>
+        <li><a href="#" id="nav-cars">Cars</a></li>
+        <li><a href="#" id="nav-upload" style="display:none">Upload</a></li>
+        <li><a href="#" id="nav-logout" style="display:none">Logout</a></li>
+        <li><a href="admin-login.html" id="nav-login">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Welcome to CARZX</h1>
+    <p>Feel the luxury of our modern car collection</p>
+  </section>
+
+  <section class="search-section" style="max-width: 600px; margin: auto; padding: 1rem;">
+    <input type="text" id="search-input" placeholder="Search cars by name..." style="width: 100%; padding: 0.5rem; font-size: 1rem;" />
+  </section>
+
+  <section class="car-upload-section" id="upload-section" style="display:none; max-width: 600px; margin: auto; padding: 2rem;">
+    <h2>Add a New Car</h2>
+    <form id="car-form" enctype="multipart/form-data">
+      <input type="text" id="car-name" name="name" placeholder="Car Name" required />
+      <input type="file" id="car-image" name="image" accept="image/*" required />
+      <textarea id="car-description" name="description" placeholder="Description" required></textarea>
+      <button type="submit">Upload Car</button>
+    </form>
+    <p id="upload-status"></p>
+  </section>
+
+  <section class="car-list" id="car-list" style="max-width: 600px; margin: auto; padding: 2rem;">
+    <h2>Available Cars</h2>
+    <div id="car-container"></div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
