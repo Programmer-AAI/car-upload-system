@@ -1,50 +1,125 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CARZX</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CARZX – Premium Cars</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <nav>
-    <div class="leftNav">CARZX</div>
-    <div class="rightNav">
-      <ul>
-        <li><a href="#" id="nav-home">Home</a></li>
-        <li><a href="#" id="nav-cars">Cars</a></li>
-        <li><a href="#" id="nav-upload" style="display:none">Upload</a></li>
-        <li><a href="#" id="nav-logout" style="display:none">Logout</a></li>
-        <li><a href="admin-login.html" id="nav-login">Login</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <section class="hero">
-    <h1>Welcome to CARZX</h1>
-    <p>Feel the luxury of our modern car collection</p>
-  </section>
+<nav class="navbar">
+  <div class="logo">CARZX</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#cars">Cars</a></li>
+    <li><a href="admin-login.html">Admin</a></li>
+  </ul>
+</nav>
 
-  <section class="search-section" style="max-width: 600px; margin: auto; padding: 1rem;">
-    <input type="text" id="search-input" placeholder="Search cars by name..." style="width: 100%; padding: 0.5rem; font-size: 1rem;" />
-  </section>
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Luxury. Performance. <span>CARZX</span></h1>
+    <p>Premium vehicles curated for elite taste</p>
+    <a href="#cars" class="hero-btn">Browse Collection</a>
+  </div>
+</section>
 
-  <section class="car-upload-section" id="upload-section" style="display:none; max-width: 600px; margin: auto; padding: 2rem;">
-    <h2>Add a New Car</h2>
-    <form id="car-form" enctype="multipart/form-data">
-      <input type="text" id="car-name" name="name" placeholder="Car Name" required />
-      <input type="file" id="car-image" name="image" accept="image/*" required />
-      <textarea id="car-description" name="description" placeholder="Description" required></textarea>
-      <button type="submit">Upload Car</button>
-    </form>
-    <p id="upload-status"></p>
-  </section>
+<section class="filters">
+  <input type="text" id="search-input" placeholder="Search cars...">
+  <select id="category-filter">
+    <option value="all">All Categories</option>
+    <option value="luxury">Luxury</option>
+    <option value="sports">Sports</option>
+    <option value="suv">SUV</option>
+  </select>
+</section>
 
-  <section class="car-list" id="car-list" style="max-width: 600px; margin: auto; padding: 2rem;">
-    <h2>Available Cars</h2>
-    <div id="car-container"></div>
-  </section>
+<section class="cars-section" id="cars">
+  <h2>Our Collection</h2>
+  <div id="car-container" class="car-grid"></div>
+  <p id="empty-state" class="empty">No cars found 🚘</p>
+</section>
 
-  <script src="script.js"></script>
+<section class="why">
+  <h2>Why CARZX?</h2>
+  <div class="why-grid">
+    <div>✔ Premium Collection</div>
+    <div>✔ Verified Vehicles</div>
+    <div>✔ Luxury Experience</div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 CARZX • Designed by Ahmed Abrar</p>
+</footer>
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.from(".logo", {
+  opacity: 0,
+  y: -30,
+  duration: 1,
+  ease: "power4.out"
+});
+
+gsap.from(".nav-links li", {
+  opacity: 0,
+  y: -20,
+  duration: 0.8,
+  stagger: 0.15,
+  delay: 0.3,
+  ease: "power3.out"
+});
+
+gsap.from(".hero-content h1", {
+  opacity: 0,
+  y: 60,
+  duration: 1.2,
+  delay: 0.5,
+  ease: "power4.out"
+});
+
+gsap.from(".hero-content p", {
+  opacity: 0,
+  y: 40,
+  duration: 1,
+  delay: 0.8
+});
+
+gsap.from(".hero-btn", {
+  opacity: 0,
+  y: 30,
+  duration: 0.8,
+  delay: 1.1
+});
+</script>
+<script>
+gsap.from(".car-card", {
+  scrollTrigger: {
+    trigger: ".car-grid",
+    start: "top 75%"
+  },
+  opacity: 0,
+  y: 120,
+  rotateX: 15,
+  stagger: 0.15,
+  duration: 1.4,
+  ease: "power4.out"
+});
+
+</script>
+<script>
+window.addEventListener("scroll", () => {
+  const scrolled = window.scrollY;
+  document.querySelector(".hero").style.backgroundPositionY =
+    scrolled * 0.4 + "px";
+});
+</script>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -27,10 +27,15 @@
     form {
       margin-bottom: 40px;
     }
-    label, input, textarea {
+    label, input, textarea, select{
       display: block;
       width: 100%;
       margin-bottom: 12px;
+    }
+    select{
+      width: 35%;
+      margin-bottom: 20px;
+      height: 2rem;
     }
     input[type="file"] {
       padding: 4px;
@@ -75,6 +80,13 @@
   <form id="addCarForm" enctype="multipart/form-data">
     <label for="name">Car Name</label>
     <input id="name" name="name" required />
+    <label for="category">Category</label>
+<select id="category" name="category" required>
+  <option value="">Select Category</option>
+  <option value="luxury">Luxury</option>
+  <option value="sports">Sports</option>
+  <option value="suv">SUV</option>
+</select>
 
     <label for="description">Description</label>
     <textarea id="description" name="description" rows="3" required></textarea>
@@ -94,6 +106,7 @@
         <th>Image</th>
         <th>Description</th>
         <th>Actions</th>
+        <th>Category</th>
       </tr>
     </thead>
     <tbody>
@@ -123,11 +136,15 @@
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
-          <td>${car.name}</td>
-          <td><img src="${car.image}" alt="${car.name}" /></td>
-          <td>${car.description}</td>
-          <td><button data-index="${idx}" class="deleteBtn">Delete</button></td>
-        `;
+  <td>${car.name}</td>
+  <td>${car.category}</td>
+  <td><img src="${car.image}" /></td>
+  <td>${car.description}</td>
+  <td>
+    <button data-index="${idx}" class="deleteBtn">Delete</button>
+  </td>
+`;
+
 
         carsTableBody.appendChild(tr);
       });

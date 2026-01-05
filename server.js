@@ -1,4 +1,7 @@
+
+
 const express = require('express');
+
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
@@ -15,6 +18,8 @@ app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 app.use(cookieParser());
+
+
 
 // Multer setup for file uploads
 const storage = multer.diskStorage({
@@ -90,23 +95,44 @@ app.post('/api/logout', (req, res) => {
 
 // Get all cars (public)
 app.get('/api/cars', (req, res) => {
-  console.log("helllo")
+  console.log("hello")
   res.json(loadCars());
 });
 
 // Add new car (admin only)
+
 app.post('/api/cars', upload.single('image'), (req, res) => {
-  const { name, description } = req.body;
-  if (!name || !description || !req.file) {
-    return res.status(400).json({ message: 'Name, description, and image are required.' });
+  try {
+    const { name, description, category } = req.body;
+
+    if (!name || !description || !category) {
+      return res.status(400).json({ message: 'Missing fields' });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ message: 'Image required' });
+    }
+
+    const cars = loadCars(); // 🔥 LOAD FIRST
+
+    const newCar = {
+      name,
+      description,
+      category,
+      image: `/uploads/${req.file.filename}`
+    };
+
+    cars.push(newCar);        // ✅ SAFE
+    saveCars(cars);           // ✅ SAFE
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
   }
-  const cars = loadCars();
-  const imageUrl = '/uploads/' + req.file.filename;
-  const newCar = { name, image: imageUrl, description };
-  cars.push(newCar);
-  saveCars(cars);
-  res.json({ message: 'Car uploaded successfully!', car: newCar });
 });
+
+
 
 // Delete car (admin only)
 app.delete('/api/cars/:index', authMiddleware, (req, res) => {

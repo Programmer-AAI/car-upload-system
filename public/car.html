@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Car Details – CARZX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<style>
+
+</style>
+<body>
+
+<nav class="navbar">
+  <div class="logo">CARZX</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+  </ul>
+</nav>
+
+<section class="details-page" id="details"></section>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+async function loadCar() {
+  const res = await fetch("/api/cars");
+  const cars = await res.json();
+  const car = cars[id];
+
+  document.getElementById("details").innerHTML = `
+    <img src="${car.image}" class="detail-img">
+    <div class="detail-info">
+      <span class="tag">${car.category || "Premium"}</span>
+      <h1>${car.name}</h1>
+      <p>${car.description}</p>
+    </div>
+  `;
+}
+
+loadCar();
+</script>
+<script>
+gsap.from(".detail-info", {
+  opacity: 0,
+  y: 120,
+  duration: 1.2,
+  delay: 0.3,
+  ease: "power4.out"
+});
+</script>
+
+</body>
+</html>

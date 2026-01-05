@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "name": "Ahmed Abrar",
+    "description": " f",
+    "category": "luxury",
+    "image": "/uploads/image-1767558627413-196015880.png"
+  },
+  {
+    "name": "Porche GT3",
+    "description": "Lorem into 10",
+    "category": "sports",
+    "image": "/uploads/image-1767590115607-445397117.jpg"
+  },
+  {
+    "name": "Range Rover",
+    "description": "Range Rover 2026",
+    "category": "suv",
+    "image": "/uploads/image-1767590176436-375995100.jpg"
+  },
+  {
+    "name": "Porche GT3",
+    "description": "c",
+    "category": "luxury",
+    "image": "/uploads/image-1767590738449-405012674.png"
+  }
+]
