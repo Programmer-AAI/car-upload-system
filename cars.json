@@ -1,11 +1,5 @@
 [
   {
-    "name": "Ahmed Abrar",
-    "description": " f",
-    "category": "luxury",
-    "image": "/uploads/image-1767558627413-196015880.png"
-  },
-  {
     "name": "Porche GT3",
     "description": "Lorem into 10",
     "category": "sports",
@@ -18,9 +12,21 @@
     "image": "/uploads/image-1767590176436-375995100.jpg"
   },
   {
+    "name": "BMW M4",
+    "description": "Brand New car of BMW",
+    "category": "sports",
+    "image": "/uploads/image-1767612655951-846952916.jpg"
+  },
+  {
     "name": "Porche GT3",
-    "description": "c",
+    "description": "Red Porche GT3 updated version\r\n",
+    "category": "sports",
+    "image": "/uploads/image-1767612723592-860363211.jpg"
+  },
+  {
+    "name": "Toyota ",
+    "description": "2026 Toyota luxury class",
     "category": "luxury",
-    "image": "/uploads/image-1767590738449-405012674.png"
+    "image": "/uploads/image-1767612781528-290369190.jpg"
   }
 ]

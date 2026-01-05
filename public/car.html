@@ -4,14 +4,20 @@
   <meta charset="UTF-8">
   <title>Car Details – CARZX</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<style>
 
-</style>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- GSAP -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js" defer></script>
+</head>
+
 <body>
 
+<!-- ================= NAVBAR ================= -->
 <nav class="navbar">
   <div class="logo">CARZX</div>
   <ul class="nav-links">
@@ -19,37 +25,81 @@
   </ul>
 </nav>
 
-<section class="details-page" id="details"></section>
+<!-- ================= PRODUCT PAGE ================= -->
+<section class="details-page" id="details">
+  <!-- injected by JS -->
+</section>
 
+<!-- ================= SCRIPT ================= -->
 <script>
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const id = Number(params.get("id"));
 
 async function loadCar() {
   const res = await fetch("/api/cars");
   const cars = await res.json();
   const car = cars[id];
 
+  if (!car) {
+    document.getElementById("details").innerHTML = `
+      <div class="not-found">
+        <h1>Car Not Found</h1>
+        <a href="index.html" class="hero-btn">Back to Home</a>
+      </div>
+    `;
+    return;
+  }
+
   document.getElementById("details").innerHTML = `
-    <img src="${car.image}" class="detail-img">
+    <!-- HERO IMAGE -->
+    <div class="detail-hero">
+      <img src="${car.image}" alt="${car.name}">
+    </div>
+
+    <!-- INFO -->
     <div class="detail-info">
       <span class="tag">${car.category || "Premium"}</span>
       <h1>${car.name}</h1>
-      <p>${car.description}</p>
+      <p class="desc">${car.description}</p>
+
+      <!-- SPECS -->
+      <div class="specs">
+        <div><span>Engine</span><strong>V8 Twin Turbo</strong></div>
+        <div><span>Top Speed</span><strong>340 km/h</strong></div>
+        <div><span>0–100</span><strong>3.2s</strong></div>
+        <div><span>Drive</span><strong>AWD</strong></div>
+      </div>
+
+      <!-- CTA -->
+      <a href="#" class="cta-btn">Request Inquiry</a>
     </div>
   `;
+
+  // Animations
+  gsap.from(".detail-hero img", {
+    scale: 1.15,
+    duration: 2,
+    ease: "power4.out"
+  });
+
+  gsap.from(".detail-info", {
+    opacity: 0,
+    y: 120,
+    duration: 1.2,
+    delay: 0.4,
+    ease: "power4.out"
+  });
+
+  gsap.from(".specs div", {
+    opacity: 0,
+    y: 40,
+    duration: 0.8,
+    stagger: 0.15,
+    delay: 0.8
+  });
 }
 
 loadCar();
-</script>
-<script>
-gsap.from(".detail-info", {
-  opacity: 0,
-  y: 120,
-  duration: 1.2,
-  delay: 0.3,
-  ease: "power4.out"
-});
 </script>
 
 </body>
